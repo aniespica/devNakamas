@@ -1,10 +1,15 @@
 import Image from "next/image.js";
-function Package({ onStepChange, data, index }) {
+function Package({ onStepChange, data, index, setCurrentPackage }) {
     return (
         <button
             className="slds-card"
             style={{ border: "1px solid lightgray" }}
-            onClick={() => onStepChange(1)}
+            onClick={() => {
+                setCurrentPackage(
+                    Object.assign({ frame: data.frames[index] }, data)
+                );
+                onStepChange(1);
+            }}
         >
             <div className="slds-card__header slds-grid">
                 <header className="slds-media slds-media_center slds-has-flexi-truncate">
@@ -36,10 +41,25 @@ function Package({ onStepChange, data, index }) {
                                     <ul className="slds-list_horizontal slds-has-dividers_right slds-m-top_xx-small">
                                         <li className="slds-item">
                                             Time Frame:{" "}
-                                            <span>{data.frames[index].auctifera__start_time__c} t0 {data.frames[index].auctifera__end_time__c}</span>
+                                            <span>
+                                                {
+                                                    data.frames[index]
+                                                        .auctifera__start_time__c
+                                                }{" "}
+                                                t0{" "}
+                                                {
+                                                    data.frames[index]
+                                                        .auctifera__end_time__c
+                                                }
+                                            </span>
                                         </li>
                                         <li className="slds-item">
-                                            Capacity: <span>{data.auctifera__chosen_location_s_capacity__c}</span>
+                                            Capacity:{" "}
+                                            <span>
+                                                {
+                                                    data.auctifera__chosen_location_s_capacity__c
+                                                }
+                                            </span>
                                         </li>
                                         <li className="slds-item">
                                             Price:{" "}
@@ -71,8 +91,13 @@ function Package({ onStepChange, data, index }) {
         </button>
     );
 }
-export default function Packages({ onStepChange, data, isLoading }) {
-    if (isLoading)
+export default function Packages({
+    onStepChange,
+    data,
+    isLoading,
+    setCurrentPackage,
+}) {
+    if (isLoading) {
         return (
             <p>
                 <div
@@ -92,6 +117,7 @@ export default function Packages({ onStepChange, data, isLoading }) {
                 </div>
             </p>
         );
+    }
 
     if (!data || data.length === 0) {
         return (
@@ -123,6 +149,7 @@ export default function Packages({ onStepChange, data, isLoading }) {
                             data={data[sfid]}
                             index={index}
                             onStepChange={onStepChange}
+                            setCurrentPackage={setCurrentPackage}
                         />
                     );
                 });

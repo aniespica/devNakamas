@@ -37,6 +37,19 @@ export default async function handler(req, res) {
         const packageIds = {};
         rows.forEach((row) => (packageIds[row.sfid] = row));
 
+        if (capacity && capacity != "null") {
+            sql = `SELECT * FROM salesforce.Auctifera__Rental_Resources__c WHERE Auctifera__Rental_Event__c IN ('${Object.keys(
+                packageIds
+            ).join(
+                "','"
+            )}') AND Auctifera__Location_Capacity__c >= ${capacity}`;
+            const { rows: packageResources } = await db.query(sql);
+
+            packageResources.forEach((packageResource) => {
+                packageIds[packageResource.auctifera__rental_event__c].location = packageResource;
+            });
+        }
+
         sql = `SELECT * FROM salesforce.Auctifera__Frame__c WHERE Auctifera__Rental_Event_Group_Template__c IN ('${Object.keys(
             packageIds
         ).join("','")}')  AND auctifera__date__c = '${currentDate}'`;
@@ -44,7 +57,7 @@ export default async function handler(req, res) {
         if (frame != "null") {
             sql += ` AND auctifera__start_time__c >= '${
                 frame.split(",")[0]
-            }' AND auctifera__end_time__c <= '${frame.split(",")[1]}'`;
+            }' AND auctifera__end_time__c >= '${frame.split(",")[1]}'`;
         }
 
         const { rows: frames } = await db.query(sql);
@@ -77,7 +90,6 @@ export default async function handler(req, res) {
 
         res.statusCode = 200;
         res.json(packageIds);
-
     } else {
         res.statusCode = 405;
         res.json({

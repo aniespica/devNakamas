@@ -4,14 +4,26 @@ import Image from "next/image.js";
 import { useState, useEffect } from "react";
 import TimePicker from "rc-time-picker";
 import "rc-time-picker/assets/index.css";
-
+import moment from "moment";
 export function Steps({ currentStep, onStepChange }) {
+    const [currentPackage, setCurrentPackage] = useState(null);
+
     if (currentStep === 0) {
-        return <Step1 onStepChange={onStepChange} />;
+        return (
+            <Step1
+                onStepChange={onStepChange}
+                setCurrentPackage={setCurrentPackage}
+            />
+        );
     }
 
     if (currentStep === 1) {
-        return <Step2 onStepChange={onStepChange} />;
+        return (
+            <Step2
+                onStepChange={onStepChange}
+                currentPackage={currentPackage}
+            />
+        );
     }
 
     if (currentStep === 2) {
@@ -21,12 +33,12 @@ export function Steps({ currentStep, onStepChange }) {
     return null;
 }
 
-function Step1({ onStepChange }) {
+function Step1({ onStepChange, setCurrentPackage }) {
     const [data, setData] = useState(null);
     const [isLoading, setLoading] = useState(false);
     const [currentDate, setCurrentDate] = useState(new Date());
     const [currentCategory, setCurrentCategory] = useState("");
-    const [currentFrame, setCurrentFrame] = useState(["08:00:00", "10:00:00"]);
+    const [currentFrame, setCurrentFrame] = useState([moment(), moment()]);
     const [currentCapacity, setCurrentCapacity] = useState(30);
 
     const categories = [
@@ -39,21 +51,28 @@ function Step1({ onStepChange }) {
     useEffect(() => {
         setLoading(true);
 
-        currentDate.toISOString();
-
         const _currentDate =
             currentDate.getFullYear() +
             "-" +
             (currentDate.getMonth() + 1) +
             "-" +
             currentDate.getDate();
+
+        const _currentFrame =
+            currentFrame[0] && currentFrame[1]
+                ? [
+                      currentFrame[0].seconds(0).format("HH:mm:ss"),
+                      currentFrame[1].seconds(0).format("HH:mm:ss"),
+                  ]
+                : null;
+
         fetch(
             "/api/package?currentDate=" +
                 _currentDate +
                 "&category=" +
                 currentCategory +
                 "&frame=" +
-                currentFrame +
+                _currentFrame +
                 "&capacity=" +
                 currentCapacity
         )
@@ -88,10 +107,6 @@ function Step1({ onStepChange }) {
                                                 id="select-01"
                                                 value={currentCategory}
                                                 onChange={(value) => {
-                                                    console.log(
-                                                        "value :>> ",
-                                                        value.target.value
-                                                    );
                                                     setCurrentCategory(
                                                         value.target.value
                                                     );
@@ -130,7 +145,21 @@ function Step1({ onStepChange }) {
                             <p>3. Select the time frame for you activity</p>
                         </div>
                         <span className="slds-size_2-of-3">
-                            <TimePicker /> to <TimePicker />
+                            <TimePicker
+                                value={currentFrame[0]}
+                                showSecond={false}
+                                onChange={(value) => {
+                                    setCurrentFrame([value, currentFrame[1]]);
+                                }}
+                            />{" "}
+                            to{" "}
+                            <TimePicker
+                                value={currentFrame[1]}
+                                showSecond={false}
+                                onChange={(value) => {
+                                    setCurrentFrame([currentFrame[0], value]);
+                                }}
+                            />
                         </span>
 
                         <div className="slds-m-top_medium">
@@ -144,9 +173,7 @@ function Step1({ onStepChange }) {
                                     required=""
                                     className="slds-input inputContainer"
                                     onChange={(value) => {
-                                        setCurrentCapacity(
-                                            value.target.value
-                                        );
+                                        setCurrentCapacity(value.target.value);
                                     }}
                                 />
                             </div>
@@ -166,6 +193,7 @@ function Step1({ onStepChange }) {
                                 onStepChange={onStepChange}
                                 data={data}
                                 isLoading={isLoading}
+                                setCurrentPackage={setCurrentPackage}
                             />
                         </>
                     </div>
@@ -174,7 +202,12 @@ function Step1({ onStepChange }) {
         </div>
     );
 }
-function Step2({ onStepChange }) {
+function Step2({ onStepChange, currentPackage }) {
+
+    if (!currentPackage) {
+        onStepChange(0);
+    }
+
     return (
         <div className="row mb-3">
             <div className="col-sm-6 themed-grid-col slds-p-top_large">
@@ -188,10 +221,10 @@ function Step2({ onStepChange }) {
                             alt="Star Admin Free"
                         />
                         <h3 className="slds-text-heading_small">
-                            Package Information
+                            {currentPackage.name}
                         </h3>
                         <div className="slds-form-element">Street 54-23</div>
-                        <div>Tuesday April 8th, 2022 - 7:00am - 8:00am</div>
+                        <div>{currentPackage.frame.name}</div>
                         <div>
                             <span
                                 className="slds-icon_container slds-icon-utility-announcement"
@@ -208,10 +241,10 @@ function Step2({ onStepChange }) {
                                 </span>
                             </span>
                             <span className="slds-align-middle">
-                                Capacity: 30
+                                Capacity: {currentPackage.auctifera__chosen_location_s_capacity__c}
                             </span>
                         </div>
-                        <div>Cost: $500</div>
+                        <div>Cost: ${currentPackage.auctifera__event_rental_total_amount__c}</div>
                         <div>
                             <div>Description</div>
                             <div>
