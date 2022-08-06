@@ -20,4 +20,10 @@
 
 .transparent {
     color: transparent !important;
+    pointer-events: none !important;
+}
+
+.button:hover, .button:active, .button:focus {
+    background: transparent !important;
+    box-shadow: none !important;
 }
