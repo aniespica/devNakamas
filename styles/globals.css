@@ -21,15 +21,11 @@ a {
   height: 1rem;
 }
 
-.col {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  border-radius: .5rem;
-  margin: 1rem;
+ol, ul {
+  padding-left: 0 !important;
 }
 
-.grid {
-  margin: 0px 5%;
-  flex-wrap: wrap;
+.slds-has-dividers_right > .slds-list__item:after, .slds-has-dividers--right > .slds-list__item:after, .slds-has-dividers_right > .slds-item:after, .slds-has-dividers--right > .slds-item:after {
+  display: none;
 }
 
