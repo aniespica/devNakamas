@@ -359,7 +359,7 @@ function Step2({ onStepChange }) {
                                 </div>
                             </div>
                             <button
-                                className="slds-button slds-button_brand"
+                                className="slds-button slds-button_brand slds-button_stretch slds-m-top_medium"
                                 onClick={() => onStepChange(2)}
                             >
                                 Go to Payment
