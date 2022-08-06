@@ -2,11 +2,11 @@ import Calendar from 'react-calendar';
 import { useState } from 'react';
 import 'react-calendar/dist/Calendar.css';
 
-export default function Home() {
-  const [value, onChange] = useState(new Date());
+export default function Home({currentDate, setCurrentDate}) {
+  
   return (
     <div>
-    <Calendar onChange={onChange} value={value} />
+    <Calendar onChange={setCurrentDate} value={currentDate} />
   </div>
   )
 }

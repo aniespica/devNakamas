@@ -23,28 +23,26 @@ function ProgressStep({ label, onClick, status }) {
             }
           ></use>
         </svg>
-        <span style={{
-          "position": "absolute",
-          "padding-top": "70px",
-          "color": "black"
-        }}>{label}</span>
+        <span
+          style={{
+            position: "absolute",
+            "padding-top": "70px",
+            color: "black",
+          }}
+        >
+          {label}
+        </span>
       </button>
     </li>
   );
 }
 export function ProgressIndicator({ steps, currentStep, onStepChange }) {
-  
   return (
-    <div className={"slds-m-top_xx-large slds-m-bottom_xx-large " + style.container}>
-      {/* <button class={"slds-button slds-button_neutral " + style.button + " " + (steps[currentStep - 1] ? " " : style.transparent)} onClick={() => onChange(currentStep - 1)}>
-        <svg
-          class="slds-button__icon slds-button__icon_left"
-          aria-hidden="true"
-        >
-          <use href="/assets/icons/utility-sprite/svg/symbols.svg#back"></use>
-        </svg>
-        {steps[currentStep - 1] ? steps[currentStep - 1].label : 'back to previous'}
-      </button> */}
+    <div
+      className={
+        "slds-m-top_xx-large slds-m-bottom_xx-large " + style.container
+      }
+    >
       <div className="slds-progress">
         <ol className="slds-progress__list">
           {steps.map((step, index) => {
