@@ -7,6 +7,7 @@ import "rc-time-picker/assets/index.css";
 import moment from "moment";
 export function Steps({ currentStep, onStepChange }) {
     const [currentPackage, setCurrentPackage] = useState(null);
+    const [hostUser, setHostUser] = useState({});
 
     if (currentStep === 0) {
         return (
@@ -22,12 +23,14 @@ export function Steps({ currentStep, onStepChange }) {
             <Step2
                 onStepChange={onStepChange}
                 currentPackage={currentPackage}
+                hostUser={hostUser}
+                setHostUser={setHostUser}
             />
         );
     }
 
     if (currentStep === 2) {
-        return <Step3 />;
+        return <Step3 currentPackage={currentPackage} hostUser={hostUser} />;
     }
 
     return null;
@@ -202,8 +205,7 @@ function Step1({ onStepChange, setCurrentPackage }) {
         </div>
     );
 }
-function Step2({ onStepChange, currentPackage }) {
-
+function Step2({ onStepChange, currentPackage, setHostUser, hostUser }) {
     if (!currentPackage) {
         onStepChange(0);
     }
@@ -241,10 +243,18 @@ function Step2({ onStepChange, currentPackage }) {
                                 </span>
                             </span>
                             <span className="slds-align-middle">
-                                Capacity: {currentPackage.auctifera__chosen_location_s_capacity__c}
+                                Capacity:{" "}
+                                {
+                                    currentPackage.auctifera__chosen_location_s_capacity__c
+                                }
                             </span>
                         </div>
-                        <div>Cost: ${currentPackage.auctifera__event_rental_total_amount__c}</div>
+                        <div>
+                            Cost: $
+                            {
+                                currentPackage.auctifera__event_rental_total_amount__c
+                            }
+                        </div>
                         <div>
                             <div>Description</div>
                             <div>
@@ -324,6 +334,14 @@ function Step2({ onStepChange, currentPackage }) {
                                                 type="text"
                                                 id="form-element-01"
                                                 className="slds-input"
+                                                value={hostUser.firstName}
+                                                onChange={(e) => {
+                                                    setHostUser({
+                                                        ...hostUser,
+                                                        firstName:
+                                                            e.target.value,
+                                                    });
+                                                }}
                                             />
                                         </div>
                                     </div>
@@ -341,6 +359,14 @@ function Step2({ onStepChange, currentPackage }) {
                                                 type="text"
                                                 id="form-element-01"
                                                 className="slds-input"
+                                                value={hostUser.lastName}
+                                                onChange={(e) => {
+                                                    setHostUser({
+                                                        ...hostUser,
+                                                        lastName:
+                                                            e.target.value,
+                                                    });
+                                                }}
                                             />
                                         </div>
                                     </div>
@@ -358,6 +384,13 @@ function Step2({ onStepChange, currentPackage }) {
                                         type="text"
                                         id="form-element-01"
                                         className="slds-input"
+                                        value={hostUser.email}
+                                        onChange={(e) => {
+                                            setHostUser({
+                                                ...hostUser,
+                                                email: e.target.value,
+                                            });
+                                        }}
                                     />
                                 </div>
                             </div>
@@ -373,6 +406,13 @@ function Step2({ onStepChange, currentPackage }) {
                                         type="text"
                                         id="form-element-01"
                                         className="slds-input"
+                                        value={hostUser.homePhone}
+                                        onChange={(e) => {
+                                            setHostUser({
+                                                ...hostUser,
+                                                homePhone: e.target.value,
+                                            });
+                                        }}
                                     />
                                 </div>
                             </div>
@@ -388,12 +428,21 @@ function Step2({ onStepChange, currentPackage }) {
                                         type="text"
                                         id="form-element-01"
                                         className="slds-input"
+                                        value={hostUser.mobilePhone}
+                                        onChange={(e) => {
+                                            setHostUser({
+                                                ...hostUser,
+                                                mobilePhone: e.target.value,
+                                            });
+                                        }}
                                     />
                                 </div>
                             </div>
                             <button
                                 className="slds-button slds-button_brand slds-button_stretch slds-m-top_medium"
-                                onClick={() => onStepChange(2)}
+                                onClick={() => {
+                                    onStepChange(2);
+                                }}
                             >
                                 Go to Payment
                             </button>
@@ -404,7 +453,33 @@ function Step2({ onStepChange, currentPackage }) {
         </div>
     );
 }
-function Step3() {
+function Step3({ hostUser, currentPackage }) {
+    const [data, setData] = useState(null);
+    const [isLoading, setLoading] = useState(false);
+
+    useEffect(() => {
+        fetch("/api/create-rental-order", {
+            method: "POST",
+            body: JSON.stringify({ hostUser, currentPackage }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setData(data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                setLoading(false);
+            });
+    }, [hostUser, currentPackage]);
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!data) {
+        return <div>data...</div>;
+    }
+
     return (
         <div className="row mb-3">
             <div className="col-sm-6 themed-grid-col slds-p-top_large">
