@@ -17,7 +17,7 @@ function Package({onStepChange}) {
                   className="ml-2"
                   width="100"
                   height="100"
-                  src="/logo.png"
+                  src="/package.jpg"
                   alt="Star Admin Free"
                 />
                 <span class="slds-assistive-text">account</span>
