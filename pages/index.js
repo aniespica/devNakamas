@@ -6,31 +6,58 @@ import "@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-s
 import style from "../styles/Home.module.css";
 
 export default function Home() {
+  const [currentStep, onChange] = useState(0);
+  const steps = [
+    {
+      label: "Check Availability",
+    },
+    {
+      label: "Registration",
+    },
+    {
+      label: "Payment",
+    },
+  ];
+
   return (
     <div>
       <Header />
       <div className={style.container}>
         <ProgressIndicator
-          steps={[
-            {
-              label: "Check Availability",
-            },
-            {
-              label: "Registration",
-            },
-            {
-              label: "Payment",
-            },
-          ]}
+          currentStep={currentStep}
+          steps={steps}
+          onChange={onChange}
         />
-        <div class="slds-grid slds-gutters grid">
-          <div class="slds-col col">
-            <CalendarSelected></CalendarSelected>
+        {currentStep === 0 && (
+          <div className="slds-grid slds-gutters grid">
+            <div className="slds-col col">
+              <CalendarSelected></CalendarSelected>
+            </div>
+            <div className="slds-col col">
+              <span>2</span>
+            </div>
           </div>
-          <div class="slds-col col">
-            <span>2</span>
+        )}
+        {currentStep === 1 && (
+          <div className="slds-grid slds-gutters grid">
+            <div className="slds-col col">
+              1
+            </div>
+            <div className="slds-col col">
+              <span>2</span>
+            </div>
           </div>
-        </div>
+        )}
+        {currentStep === 2 && (
+          <div className="slds-grid slds-gutters grid">
+            <div className="slds-col col">
+              1
+            </div>
+            <div className="slds-col col">
+              <span>2</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

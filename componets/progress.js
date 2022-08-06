@@ -29,8 +29,8 @@ function ProgressStep({ label, onClick, status }) {
     </li>
   );
 }
-export function ProgressIndicator({ steps }) {
-  const [currentStep, onChange] = useState(0);
+export function ProgressIndicator({ steps, currentStep, onChange }) {
+  
   return (
     <div className={"slds-m-bottom_xx-large " + style.container}>
       <button class={"slds-button slds-button_neutral " + style.button + " " + (steps[currentStep - 1] ? " " : style.transparent)} onClick={() => onChange(currentStep - 1)}>
