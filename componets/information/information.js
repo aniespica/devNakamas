@@ -10,10 +10,10 @@ export default function information() {
             <p>1. Select a category accoring to your activity</p>
         </div>
         <div>
-        <div class="slds-form-element inputContainer">
-  <div class="slds-form-element__control">
-    <div class="slds-select_container">
-      <select class="slds-select" id="select-01">
+        <div className="slds-form-element inputContainer">
+  <div className="slds-form-element__control">
+    <div className="slds-select_container">
+      <select className="slds-select" id="select-01">
         <option value="">Select…</option>
         <option>Option One</option>
         <option>Option Two</option>
@@ -36,11 +36,11 @@ export default function information() {
         <div className="sentence"> 
             <p>4. Number of Guests</p>
         </div>
-        <div class="slds-form-element">
-  <label class="slds-form-element__label" for="text-input-id-92">
-    <abbr class="slds-required" title="required"> </abbr></label>
-  <div class="slds-form-element__control">
-    <input type="text" id="text-input-id-92" required="" class="slds-input inputContainer" />
+        <div className="slds-form-element">
+  <label className="slds-form-element__label" for="text-input-id-92">
+    <abbr className="slds-required" title="required"> </abbr></label>
+  <div className="slds-form-element__control">
+    <input type="text" id="text-input-id-92" required="" className="slds-input inputContainer" />
   </div>
 </div>
     </div>
