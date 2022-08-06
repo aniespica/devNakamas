@@ -25,7 +25,7 @@ export default function Home() {
                 <div className="px-3 py-2 bg-dark text-white">
                     <div className="container">
                         <div className="d-flex flex-wrap align-items-left justify-content-left">
-                            <a
+                            <div
                                 href="/"
                                 className="d-flex align-items-left my-2 my-lg-0 me-lg-auto text-white text-decoration-none"
                             >
@@ -36,7 +36,7 @@ export default function Home() {
                                     src="/logo.png"
                                     alt="Star Admin Free"
                                 />
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
