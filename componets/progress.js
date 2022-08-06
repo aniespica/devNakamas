@@ -32,7 +32,7 @@ function ProgressStep({ label, onClick, status }) {
     </li>
   );
 }
-export function ProgressIndicator({ steps, currentStep, onChange }) {
+export function ProgressIndicator({ steps, currentStep, onStepChange }) {
   
   return (
     <div className={"slds-m-top_xx-large slds-m-bottom_xx-large " + style.container}>
@@ -60,7 +60,7 @@ export function ProgressIndicator({ steps, currentStep, onChange }) {
               <ProgressStep
                 key={index}
                 label={step.label}
-                onClick={() => onChange(index)}
+                onClick={() => onStepChange(index)}
                 status={status}
               />
             );

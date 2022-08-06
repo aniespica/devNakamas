@@ -8,7 +8,7 @@ import style from "../styles/Home.module.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 export default function Home() {
-  const [currentStep, onChange] = useState(0);
+  const [currentStep, onStepChange] = useState(0);
   const steps = [
     {
       label: "Check Availability",
@@ -48,9 +48,9 @@ export default function Home() {
         <ProgressIndicator
           currentStep={currentStep}
           steps={steps}
-          onChange={onChange}
+          onStepChange={onStepChange}
         />
-        <Steps currentStep={currentStep}/>
+        <Steps currentStep={currentStep} onStepChange={onStepChange}/>
       </div>
     </div>
   );

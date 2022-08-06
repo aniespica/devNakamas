@@ -1,12 +1,13 @@
 import CalendarSelected from "./calendar/calendar.js";
+import { Packages } from "./package.js";
 import Image from "next/image.js";
-export function Steps({ currentStep }) {
+export function Steps({ currentStep, onStepChange }) {
   if (currentStep === 0) {
-    return <Step1 />;
+    return <Step1 onStepChange={onStepChange}/>;
   }
 
   if (currentStep === 1) {
-    return <Step2 />;
+    return <Step2 onStepChange={onStepChange}/>;
   }
 
   if (currentStep === 2) {
@@ -15,7 +16,8 @@ export function Steps({ currentStep }) {
 
   return null;
 }
-export function Step1() {
+
+function Step1({onStepChange}) {
   return (
     <div class="row mb-3">
       <div class="col-sm-6 themed-grid-col slds-p-top_large">
@@ -33,475 +35,7 @@ export function Step1() {
           <div class="slds-card__body slds-card__body_inner">
             <p>5. Choose the package for you</p>
             <>
-              <article
-                class="slds-card"
-                style={{ border: "1px solid lightgray" }}
-              >
-                <div class="slds-card__header slds-grid">
-                  <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                    <div class="slds-media__figure">
-                      <span
-                        class="slds-icon_container slds-icon-standard-account"
-                        title="account"
-                      >
-                        <Image
-                          className="ml-2"
-                          width="100"
-                          height="100"
-                          src="/logo.png"
-                          alt="Star Admin Free"
-                        />
-                        <span class="slds-assistive-text">account</span>
-                      </span>
-                    </div>
-                    <div class="slds-media__body">
-                      <div class="demo-only">
-                        <article
-                          class="slds-tile"
-                          style={{ "max-height": "100px" }}
-                        >
-                          <div
-                            class="slds-tile__detail"
-                            style={{ "font-size": "small" }}
-                          >
-                            <ul class="slds-list_horizontal slds-has-dividers_right slds-m-top_xx-small">
-                              <li class="slds-item">
-                                Time Frame: <span>8:00am t0 9:00am</span>
-                              </li>
-                              <li class="slds-item">
-                                Capacity: <span>30 people</span>
-                              </li>
-                              <li class="slds-item">
-                                Price: <span>$500</span>
-                              </li>
-                            </ul>
-                            <p
-                              style={{
-                                overflow: "hidden",
-                                "max-height": "60px",
-                              }}
-                            >
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Suspendisse justo eros, ullamcorper sit amet
-                              auctor ut, pharetra vel odio. Aliquam tincidunt,
-                              metus interdum tristique consectetur, ligula lorem
-                              consequat velit, id elementum ante justo id
-                              turpis. Pellentesque a tortor lacus. Duis eget
-                              risus elementum, vehicula augue quis, egestas leo.
-                              Pellentesque habitant morbi tristique senectus et
-                              netus et malesuada fames ac turpis egestas. Fusce
-                              purus est, vehicula ac aliquet eget, blandit eu
-                              libero. Fusce finibus interdum aliquam.
-                            </p>
-                          </div>
-                        </article>
-                      </div>
-                    </div>
-                  </header>
-                </div>
-              </article>
-              <article
-                class="slds-card"
-                style={{ border: "1px solid lightgray" }}
-              >
-                <div class="slds-card__header slds-grid">
-                  <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                    <div class="slds-media__figure">
-                      <span
-                        class="slds-icon_container slds-icon-standard-account"
-                        title="account"
-                      >
-                        <Image
-                          className="ml-2"
-                          width="100"
-                          height="100"
-                          src="/logo.png"
-                          alt="Star Admin Free"
-                        />
-                        <span class="slds-assistive-text">account</span>
-                      </span>
-                    </div>
-                    <div class="slds-media__body">
-                      <div class="demo-only">
-                        <article
-                          class="slds-tile"
-                          style={{ "max-height": "100px" }}
-                        >
-                          <div
-                            class="slds-tile__detail"
-                            style={{ "font-size": "small" }}
-                          >
-                            <ul class="slds-list_horizontal slds-has-dividers_right slds-m-top_xx-small">
-                              <li class="slds-item">
-                                Time Frame: <span>8:00am t0 9:00am</span>
-                              </li>
-                              <li class="slds-item">
-                                Capacity: <span>30 people</span>
-                              </li>
-                              <li class="slds-item">
-                                Price: <span>$500</span>
-                              </li>
-                            </ul>
-                            <p
-                              style={{
-                                overflow: "hidden",
-                                "max-height": "60px",
-                              }}
-                            >
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Suspendisse justo eros, ullamcorper sit amet
-                              auctor ut, pharetra vel odio. Aliquam tincidunt,
-                              metus interdum tristique consectetur, ligula lorem
-                              consequat velit, id elementum ante justo id
-                              turpis. Pellentesque a tortor lacus. Duis eget
-                              risus elementum, vehicula augue quis, egestas leo.
-                              Pellentesque habitant morbi tristique senectus et
-                              netus et malesuada fames ac turpis egestas. Fusce
-                              purus est, vehicula ac aliquet eget, blandit eu
-                              libero. Fusce finibus interdum aliquam.
-                            </p>
-                          </div>
-                        </article>
-                      </div>
-                    </div>
-                  </header>
-                </div>
-              </article>
-              <article
-                class="slds-card"
-                style={{ border: "1px solid lightgray" }}
-              >
-                <div class="slds-card__header slds-grid">
-                  <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                    <div class="slds-media__figure">
-                      <span
-                        class="slds-icon_container slds-icon-standard-account"
-                        title="account"
-                      >
-                        <Image
-                          className="ml-2"
-                          width="100"
-                          height="100"
-                          src="/logo.png"
-                          alt="Star Admin Free"
-                        />
-                        <span class="slds-assistive-text">account</span>
-                      </span>
-                    </div>
-                    <div class="slds-media__body">
-                      <div class="demo-only">
-                        <article
-                          class="slds-tile"
-                          style={{ "max-height": "100px" }}
-                        >
-                          <div
-                            class="slds-tile__detail"
-                            style={{ "font-size": "small" }}
-                          >
-                            <ul class="slds-list_horizontal slds-has-dividers_right slds-m-top_xx-small">
-                              <li class="slds-item">
-                                Time Frame: <span>8:00am t0 9:00am</span>
-                              </li>
-                              <li class="slds-item">
-                                Capacity: <span>30 people</span>
-                              </li>
-                              <li class="slds-item">
-                                Price: <span>$500</span>
-                              </li>
-                            </ul>
-                            <p
-                              style={{
-                                overflow: "hidden",
-                                "max-height": "60px",
-                              }}
-                            >
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Suspendisse justo eros, ullamcorper sit amet
-                              auctor ut, pharetra vel odio. Aliquam tincidunt,
-                              metus interdum tristique consectetur, ligula lorem
-                              consequat velit, id elementum ante justo id
-                              turpis. Pellentesque a tortor lacus. Duis eget
-                              risus elementum, vehicula augue quis, egestas leo.
-                              Pellentesque habitant morbi tristique senectus et
-                              netus et malesuada fames ac turpis egestas. Fusce
-                              purus est, vehicula ac aliquet eget, blandit eu
-                              libero. Fusce finibus interdum aliquam.
-                            </p>
-                          </div>
-                        </article>
-                      </div>
-                    </div>
-                  </header>
-                </div>
-              </article>
-              <article
-                class="slds-card"
-                style={{ border: "1px solid lightgray" }}
-              >
-                <div class="slds-card__header slds-grid">
-                  <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                    <div class="slds-media__figure">
-                      <span
-                        class="slds-icon_container slds-icon-standard-account"
-                        title="account"
-                      >
-                        <Image
-                          className="ml-2"
-                          width="100"
-                          height="100"
-                          src="/logo.png"
-                          alt="Star Admin Free"
-                        />
-                        <span class="slds-assistive-text">account</span>
-                      </span>
-                    </div>
-                    <div class="slds-media__body">
-                      <div class="demo-only">
-                        <article
-                          class="slds-tile"
-                          style={{ "max-height": "100px" }}
-                        >
-                          <div
-                            class="slds-tile__detail"
-                            style={{ "font-size": "small" }}
-                          >
-                            <ul class="slds-list_horizontal slds-has-dividers_right slds-m-top_xx-small">
-                              <li class="slds-item">
-                                Time Frame: <span>8:00am t0 9:00am</span>
-                              </li>
-                              <li class="slds-item">
-                                Capacity: <span>30 people</span>
-                              </li>
-                              <li class="slds-item">
-                                Price: <span>$500</span>
-                              </li>
-                            </ul>
-                            <p
-                              style={{
-                                overflow: "hidden",
-                                "max-height": "60px",
-                              }}
-                            >
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Suspendisse justo eros, ullamcorper sit amet
-                              auctor ut, pharetra vel odio. Aliquam tincidunt,
-                              metus interdum tristique consectetur, ligula lorem
-                              consequat velit, id elementum ante justo id
-                              turpis. Pellentesque a tortor lacus. Duis eget
-                              risus elementum, vehicula augue quis, egestas leo.
-                              Pellentesque habitant morbi tristique senectus et
-                              netus et malesuada fames ac turpis egestas. Fusce
-                              purus est, vehicula ac aliquet eget, blandit eu
-                              libero. Fusce finibus interdum aliquam.
-                            </p>
-                          </div>
-                        </article>
-                      </div>
-                    </div>
-                  </header>
-                </div>
-              </article>
-              <article
-                class="slds-card"
-                style={{ border: "1px solid lightgray" }}
-              >
-                <div class="slds-card__header slds-grid">
-                  <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                    <div class="slds-media__figure">
-                      <span
-                        class="slds-icon_container slds-icon-standard-account"
-                        title="account"
-                      >
-                        <Image
-                          className="ml-2"
-                          width="100"
-                          height="100"
-                          src="/logo.png"
-                          alt="Star Admin Free"
-                        />
-                        <span class="slds-assistive-text">account</span>
-                      </span>
-                    </div>
-                    <div class="slds-media__body">
-                      <div class="demo-only">
-                        <article
-                          class="slds-tile"
-                          style={{ "max-height": "100px" }}
-                        >
-                          <div
-                            class="slds-tile__detail"
-                            style={{ "font-size": "small" }}
-                          >
-                            <ul class="slds-list_horizontal slds-has-dividers_right slds-m-top_xx-small">
-                              <li class="slds-item">
-                                Time Frame: <span>8:00am t0 9:00am</span>
-                              </li>
-                              <li class="slds-item">
-                                Capacity: <span>30 people</span>
-                              </li>
-                              <li class="slds-item">
-                                Price: <span>$500</span>
-                              </li>
-                            </ul>
-                            <p
-                              style={{
-                                overflow: "hidden",
-                                "max-height": "60px",
-                              }}
-                            >
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Suspendisse justo eros, ullamcorper sit amet
-                              auctor ut, pharetra vel odio. Aliquam tincidunt,
-                              metus interdum tristique consectetur, ligula lorem
-                              consequat velit, id elementum ante justo id
-                              turpis. Pellentesque a tortor lacus. Duis eget
-                              risus elementum, vehicula augue quis, egestas leo.
-                              Pellentesque habitant morbi tristique senectus et
-                              netus et malesuada fames ac turpis egestas. Fusce
-                              purus est, vehicula ac aliquet eget, blandit eu
-                              libero. Fusce finibus interdum aliquam.
-                            </p>
-                          </div>
-                        </article>
-                      </div>
-                    </div>
-                  </header>
-                </div>
-              </article>
-              <article
-                class="slds-card"
-                style={{ border: "1px solid lightgray" }}
-              >
-                <div class="slds-card__header slds-grid">
-                  <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                    <div class="slds-media__figure">
-                      <span
-                        class="slds-icon_container slds-icon-standard-account"
-                        title="account"
-                      >
-                        <Image
-                          className="ml-2"
-                          width="100"
-                          height="100"
-                          src="/logo.png"
-                          alt="Star Admin Free"
-                        />
-                        <span class="slds-assistive-text">account</span>
-                      </span>
-                    </div>
-                    <div class="slds-media__body">
-                      <div class="demo-only">
-                        <article
-                          class="slds-tile"
-                          style={{ "max-height": "100px" }}
-                        >
-                          <div
-                            class="slds-tile__detail"
-                            style={{ "font-size": "small" }}
-                          >
-                            <ul class="slds-list_horizontal slds-has-dividers_right slds-m-top_xx-small">
-                              <li class="slds-item">
-                                Time Frame: <span>8:00am t0 9:00am</span>
-                              </li>
-                              <li class="slds-item">
-                                Capacity: <span>30 people</span>
-                              </li>
-                              <li class="slds-item">
-                                Price: <span>$500</span>
-                              </li>
-                            </ul>
-                            <p
-                              style={{
-                                overflow: "hidden",
-                                "max-height": "60px",
-                              }}
-                            >
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Suspendisse justo eros, ullamcorper sit amet
-                              auctor ut, pharetra vel odio. Aliquam tincidunt,
-                              metus interdum tristique consectetur, ligula lorem
-                              consequat velit, id elementum ante justo id
-                              turpis. Pellentesque a tortor lacus. Duis eget
-                              risus elementum, vehicula augue quis, egestas leo.
-                              Pellentesque habitant morbi tristique senectus et
-                              netus et malesuada fames ac turpis egestas. Fusce
-                              purus est, vehicula ac aliquet eget, blandit eu
-                              libero. Fusce finibus interdum aliquam.
-                            </p>
-                          </div>
-                        </article>
-                      </div>
-                    </div>
-                  </header>
-                </div>
-              </article>
-              <article
-                class="slds-card"
-                style={{ border: "1px solid lightgray" }}
-              >
-                <div class="slds-card__header slds-grid">
-                  <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                    <div class="slds-media__figure">
-                      <span
-                        class="slds-icon_container slds-icon-standard-account"
-                        title="account"
-                      >
-                        <Image
-                          className="ml-2"
-                          width="100"
-                          height="100"
-                          src="/logo.png"
-                          alt="Star Admin Free"
-                        />
-                        <span class="slds-assistive-text">account</span>
-                      </span>
-                    </div>
-                    <div class="slds-media__body">
-                      <div class="demo-only">
-                        <article
-                          class="slds-tile"
-                          style={{ "max-height": "100px" }}
-                        >
-                          <div
-                            class="slds-tile__detail"
-                            style={{ "font-size": "small" }}
-                          >
-                            <ul class="slds-list_horizontal slds-has-dividers_right slds-m-top_xx-small">
-                              <li class="slds-item">
-                                Time Frame: <span>8:00am t0 9:00am</span>
-                              </li>
-                              <li class="slds-item">
-                                Capacity: <span>30 people</span>
-                              </li>
-                              <li class="slds-item">
-                                Price: <span>$500</span>
-                              </li>
-                            </ul>
-                            <p
-                              style={{
-                                overflow: "hidden",
-                                "max-height": "60px",
-                              }}
-                            >
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Suspendisse justo eros, ullamcorper sit amet
-                              auctor ut, pharetra vel odio. Aliquam tincidunt,
-                              metus interdum tristique consectetur, ligula lorem
-                              consequat velit, id elementum ante justo id
-                              turpis. Pellentesque a tortor lacus. Duis eget
-                              risus elementum, vehicula augue quis, egestas leo.
-                              Pellentesque habitant morbi tristique senectus et
-                              netus et malesuada fames ac turpis egestas. Fusce
-                              purus est, vehicula ac aliquet eget, blandit eu
-                              libero. Fusce finibus interdum aliquam.
-                            </p>
-                          </div>
-                        </article>
-                      </div>
-                    </div>
-                  </header>
-                </div>
-              </article>
+            <Packages onStepChange={onStepChange}/>
             </>
           </div>
         </article>
@@ -509,7 +43,7 @@ export function Step1() {
     </div>
   );
 }
-export function Step2() {
+function Step2({onStepChange}) {
   return (
     <div class="row mb-3">
       <div class="col-sm-6 themed-grid-col slds-p-top_large">
@@ -673,7 +207,7 @@ export function Step2() {
                   />
                 </div>
               </div>
-              <button class="slds-button slds-button_brand">
+              <button class="slds-button slds-button_brand" onClick={()=> onStepChange(2)}>
                 Brand Button
               </button>
             </>
@@ -683,7 +217,7 @@ export function Step2() {
     </div>
   );
 }
-export function Step3() {
+function Step3() {
   return (
     <div class="row mb-3">
       <div class="col-sm-6 themed-grid-col slds-p-top_large">
