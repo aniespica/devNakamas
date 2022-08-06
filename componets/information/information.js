@@ -7,8 +7,7 @@ export default function information() {
     return (
       <div className="container"> 
         <div className="sentence">
-            <h2 className="blondFont">1.</h2>
-            <h2>Select a category accoring to your activity</h2>
+            <p>1. Select a category accoring to your activity</p>
         </div>
         <div>
         <div class="slds-form-element inputContainer">
@@ -25,19 +24,17 @@ export default function information() {
 </div>
         </div>
         <div className="sentence">
-            <h2 className="blondFont">2.</h2>
-            <h2>Select the date you want for you activity</h2>
+            <p>2. Select the date you want for you activity</p>
         </div>
 
         <CalendarSelected ></CalendarSelected>
+        
         <div className="sentence">
-            <h2 className="blondFont">3.</h2>
-            <h2>Select the time frame for you activity</h2>
+            <p>3. Select the time frame for you activity</p>
         </div>
 
         <div className="sentence"> 
-            <h2 className="blondFont">4.</h2>
-            <h2>Number of Guests</h2>
+            <p>4. Number of Guests</p>
         </div>
         <div class="slds-form-element">
   <label class="slds-form-element__label" for="text-input-id-92">
