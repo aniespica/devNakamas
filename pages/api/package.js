@@ -5,11 +5,20 @@ export default async function handler(req, res) {
         const { currentDate, category, frame, capacity } = req.query;
 
         const partDate = currentDate.split("-");
-        const currentDateTime = new Date(Date.UTC(parseInt(partDate[0],10), parseInt(partDate[1] - 1,10), parseInt(partDate[2],10),0,0,0));
-        
+        const currentDateTime = new Date(
+            Date.UTC(
+                parseInt(partDate[0], 10),
+                parseInt(partDate[1] - 1, 10),
+                parseInt(partDate[2], 10),
+                0,
+                0,
+                0
+            )
+        );
+
         let sql = `SELECT * FROM salesforce.Auctifera__Rental_Event__c WHERE recordtypeid = '01217000005hGnIAAU' AND Auctifera__Event_End_Date_and_Time__c >= '${currentDateTime.toISOString()}' AND Auctifera__Event_Start_Date_and_Time__c <= '${currentDateTime.toISOString()}'`;
 
-        if (category != 'null') {
+        if (category != "null") {
             sql += ` AND Auctifera__Category__c = '${category}'`;
         }
 
@@ -22,24 +31,61 @@ export default async function handler(req, res) {
         }
 
         const packageIds = {};
-        rows.forEach(row => packageIds[row.sfid] = row);
+        rows.forEach((row) => (packageIds[row.sfid] = row));
 
-        if (rows.length > 0 && capacity != 'null') {
-            
-            sql = `SELECT * FROM salesforce.Auctifera__Rental_Resources__c WHERE Auctifera__Rental_Event__c IN ('${Object.keys(packageIds).join("','")}') AND Auctifera__Location_Capacity__c >= ${capacity}`;
+        if (capacity != "null") {
+            sql = `SELECT * FROM salesforce.Auctifera__Rental_Resources__c WHERE Auctifera__Rental_Event__c IN ('${Object.keys(
+                packageIds
+            ).join(
+                "','"
+            )}') AND Auctifera__Location_Capacity__c >= ${capacity}`;
             const { rows: packageResources } = await db.query(sql);
-            console.log('packageResource',packageResources);
+
+            packageResources.forEach((packageResource) => {
+                packageIds[packageResource.auctifera__rental_event__c].location = packageResource;
+            });
         }
 
-        // if (rows.length > 0 && frame != 'null') {
-        //     sql = `SELECT * FROM salesforce.Auctifera__Frame__c WHERE Auctifera__Rental_Event_Group_Template__c IN ('${Object.keys(packageIds).join("','")}' AND auctifera__end_time__c >= '${frame[1]}' AND auctifera__start_time__c <= '${frame[0]}' `;
-        //     const { rows: frames } = await db.query(sql);
-        //     console.log('frames',frames);
-        // }
+        sql = `SELECT * FROM salesforce.Auctifera__Frame__c WHERE Auctifera__Rental_Event_Group_Template__c IN ('${Object.keys(
+            packageIds
+        ).join("','")}')  AND auctifera__date__c = '${currentDate}'`;
 
+        if (frame != "null") {
+            sql += ` AND auctifera__start_time__c >= '${
+                frame.split(",")[0]
+            }' AND auctifera__end_time__c <= '${frame.split(",")[1]}'`;
+        }
 
-        res.statusCode = 200;;
-        res.json(rows);
+        const { rows: frames } = await db.query(sql);
+
+        if (frames.length === 0) {
+            res.statusCode = 200;
+            res.json(frames);
+            return;
+        }
+
+        const frameIds = {};
+        frames.forEach((frame) => {
+            if (
+                frameIds[frame.auctifera__rental_event_group_template__c] ===
+                undefined
+            ) {
+                frameIds[frame.auctifera__rental_event_group_template__c] = [
+                    frame,
+                ];
+            } else {
+                frameIds[frame.auctifera__rental_event_group_template__c].push(
+                    frame
+                );
+            }
+        });
+
+        Object.keys(frameIds).forEach((sfPackageId) => {
+            packageIds[sfPackageId].frames = frameIds[sfPackageId];
+        });
+
+        res.statusCode = 200;
+        res.json(packageIds);
 
     } else {
         res.statusCode = 405;
