@@ -18,8 +18,12 @@ export default async function handler(req, res) {
 
         let sql = `SELECT * FROM salesforce.Auctifera__Rental_Event__c WHERE recordtypeid = '01217000005hGnIAAU' AND Auctifera__Event_End_Date_and_Time__c >= '${currentDateTime.toISOString()}' AND Auctifera__Event_Start_Date_and_Time__c <= '${currentDateTime.toISOString()}'`;
 
-        if (category != "null") {
+        if (category && category != "null") {
             sql += ` AND Auctifera__Category__c LIKE '%${category}%'`;
+        }
+
+        if (capacity && capacity != "null") {
+            sql += ` AND Auctifera__Chosen_Location_s_Capacity__c >= ${capacity}`;
         }
 
         const { rows } = await db.query(sql);
@@ -32,19 +36,6 @@ export default async function handler(req, res) {
 
         const packageIds = {};
         rows.forEach((row) => (packageIds[row.sfid] = row));
-
-        if (capacity != "null") {
-            sql = `SELECT * FROM salesforce.Auctifera__Rental_Resources__c WHERE Auctifera__Rental_Event__c IN ('${Object.keys(
-                packageIds
-            ).join(
-                "','"
-            )}') AND Auctifera__Location_Capacity__c >= ${capacity}`;
-            const { rows: packageResources } = await db.query(sql);
-
-            packageResources.forEach((packageResource) => {
-                packageIds[packageResource.auctifera__rental_event__c].location = packageResource;
-            });
-        }
 
         sql = `SELECT * FROM salesforce.Auctifera__Frame__c WHERE Auctifera__Rental_Event_Group_Template__c IN ('${Object.keys(
             packageIds

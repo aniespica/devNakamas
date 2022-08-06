@@ -39,7 +39,7 @@ function Package({ onStepChange, data, index }) {
                                             <span>{data.frames[index].auctifera__start_time__c} t0 {data.frames[index].auctifera__end_time__c}</span>
                                         </li>
                                         <li class="slds-item">
-                                            Capacity: <span>{data.location.auctifera__location_capacity__c}</span>
+                                            Capacity: <span>{data.auctifera__chosen_location_s_capacity__c}</span>
                                         </li>
                                         <li class="slds-item">
                                             Price:{" "}
