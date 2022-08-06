@@ -1,0 +1,29 @@
+/* .container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.label {
+    position: absolute !important;
+    margin: 0px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    height: 1px !important;
+    white-space: nowrap !important;
+    top: 25px;
+    color: black;
+}
+
+.button {
+    border: none !important;
+    margin: 1rem !important;
+}
+
+.transparent {
+    color: transparent !important;
+    pointer-events: none !important;
+}
+
+.button:hover, .button:active, .button:focus {
+    background: transparent !important;
+    box-shadow: none !important;
+} */

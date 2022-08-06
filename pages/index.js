@@ -1,48 +1,57 @@
+import { useState } from "react";
+import Image from "next/image.js";
+import { ProgressIndicator } from "../componets/progress.js";
+import { Header } from "../componets/header.js";
+import { Steps } from "../componets/step.js";
+import "@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.css";
+import style from "../styles/Home.module.css";
+import "bootstrap/dist/css/bootstrap.css";
 
-import Information from '../componets/information/information.js'
-import { useState } from 'react';
 export default function Home() {
-  const [value, onChange] = useState(new Date());
+  const [currentStep, onStepChange] = useState(0);
+  const steps = [
+    {
+      label: "Check Availability",
+    },
+    {
+      label: "Registration",
+    },
+    {
+      label: "Payment",
+    },
+  ];
+
   return (
     <div>
-      <div>
-      <div class="slds-progress">
-<ol class="slds-progress__list">
-<li class="slds-progress__item slds-is-active">
-<button class="slds-button slds-progress__marker">
-<span class="slds-assistive-text">Step 1 - Active</span>
-</button>
-</li>
-<li class="slds-progress__item">
-<button class="slds-button slds-progress__marker">
-<span class="slds-assistive-text">Step 2 </span>
-</button>
-</li>
-<li class="slds-progress__item">
-<button class="slds-button slds-progress__marker">
-<span class="slds-assistive-text">Step 3 </span>
-</button>
-</li>
-<li class="slds-progress__item">
-<button class="slds-button slds-progress__marker">
-<span class="slds-assistive-text">Step 4 </span>
-</button>
-</li>
-<li class="slds-progress__item">
-<button class="slds-button slds-progress__marker">
-<span class="slds-assistive-text">Step 5 </span>
-</button>
-</li>
-</ol>
-<div class="slds-progress-bar slds-progress-bar_x-small" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="{{Placeholder for description of progress bar}}" role="progressbar">
-<span class="slds-progress-bar__value" style={{"width":"0%"}}>
-<span class="slds-assistive-text">Progress: 0%</span>
-</span>
-</div>
-</div>
-      </div>
-      <Information></Information>
-  </div>
-  )
+      <header>
+        <div className="px-3 py-2 bg-dark text-white">
+          <div className="container">
+            <div className="d-flex flex-wrap align-items-left justify-content-left">
+              <a
+                href="/"
+                className="d-flex align-items-left my-2 my-lg-0 me-lg-auto text-white text-decoration-none"
+              >
+                <Image
+                  className="ml-2"
+                  width="40"
+                  height="40"
+                  src="/logo.png"
+                  alt="Star Admin Free"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
 
+      <div className="container">
+        <ProgressIndicator
+          currentStep={currentStep}
+          steps={steps}
+          onStepChange={onStepChange}
+        />
+        <Steps currentStep={currentStep} onStepChange={onStepChange}/>
+      </div>
+    </div>
+  );
 }
