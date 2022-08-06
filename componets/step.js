@@ -422,7 +422,7 @@ function Step3() {
                                             className="slds-form-element__label"
                                             for="form-element-01"
                                         >
-                                            Form Label
+                                            First Name 
                                         </label>
                                         <div className="slds-form-element__control">
                                             <input
@@ -439,7 +439,7 @@ function Step3() {
                                             className="slds-form-element__label"
                                             for="form-element-01"
                                         >
-                                            Form Label
+                                            Last Name
                                         </label>
                                         <div className="slds-form-element__control">
                                             <input
@@ -456,7 +456,7 @@ function Step3() {
                                     className="slds-form-element__label"
                                     for="form-element-01"
                                 >
-                                    Form Label
+                                    Email
                                 </label>
                                 <div className="slds-form-element__control">
                                     <input
@@ -473,7 +473,7 @@ function Step3() {
                                             className="slds-form-element__label"
                                             for="form-element-01"
                                         >
-                                            Form Label
+                                            Phone 
                                         </label>
                                         <div className="slds-form-element__control">
                                             <input
@@ -490,43 +490,7 @@ function Step3() {
                                             className="slds-form-element__label"
                                             for="form-element-01"
                                         >
-                                            Form Label
-                                        </label>
-                                        <div className="slds-form-element__control">
-                                            <input
-                                                type="text"
-                                                id="form-element-01"
-                                                className="slds-input"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-sm-6 themed-grid-col">
-                                    <div className="slds-form-element">
-                                        <label
-                                            className="slds-form-element__label"
-                                            for="form-element-01"
-                                        >
-                                            Form Label
-                                        </label>
-                                        <div className="slds-form-element__control">
-                                            <input
-                                                type="text"
-                                                id="form-element-01"
-                                                className="slds-input"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 themed-grid-col">
-                                    <div className="slds-form-element">
-                                        <label
-                                            className="slds-form-element__label"
-                                            for="form-element-01"
-                                        >
-                                            Form Label
+                                            Address
                                         </label>
                                         <div className="slds-form-element__control">
                                             <input
@@ -545,7 +509,7 @@ function Step3() {
                                             className="slds-form-element__label"
                                             for="form-element-01"
                                         >
-                                            Form Label
+                                            City
                                         </label>
                                         <div className="slds-form-element__control">
                                             <input
@@ -562,7 +526,43 @@ function Step3() {
                                             className="slds-form-element__label"
                                             for="form-element-01"
                                         >
-                                            Form Label
+                                            State
+                                        </label>
+                                        <div className="slds-form-element__control">
+                                            <input
+                                                type="text"
+                                                id="form-element-01"
+                                                className="slds-input"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-sm-6 themed-grid-col">
+                                    <div className="slds-form-element">
+                                        <label
+                                            className="slds-form-element__label"
+                                            for="form-element-01"
+                                        >
+                                            Zip/Code
+                                        </label>
+                                        <div className="slds-form-element__control">
+                                            <input
+                                                type="text"
+                                                id="form-element-01"
+                                                className="slds-input"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-sm-6 themed-grid-col">
+                                    <div className="slds-form-element">
+                                        <label
+                                            className="slds-form-element__label"
+                                            for="form-element-01"
+                                        >
+                                            Country
                                         </label>
                                         <div className="slds-form-element__control">
                                             <input
@@ -580,7 +580,7 @@ function Step3() {
                                     className="slds-form-element__label"
                                     for="form-element-01"
                                 >
-                                    Form Label
+                                    Cardholder Name
                                 </label>
                                 <div className="slds-form-element__control">
                                     <input
@@ -597,7 +597,7 @@ function Step3() {
                                             className="slds-form-element__label"
                                             for="form-element-01"
                                         >
-                                            Form Label
+                                            Card number
                                         </label>
                                         <div className="slds-form-element__control">
                                             <input
@@ -616,7 +616,7 @@ function Step3() {
                                                     className="slds-form-element__label"
                                                     for="form-element-01"
                                                 >
-                                                    Form Label
+                                                    Exp.Date
                                                 </label>
                                                 <div className="slds-form-element__control">
                                                     <input
@@ -633,7 +633,7 @@ function Step3() {
                                                     className="slds-form-element__label"
                                                     for="form-element-01"
                                                 >
-                                                    Form Label
+                                                    CVC
                                                 </label>
                                                 <div className="slds-form-element__control">
                                                     <input
@@ -647,8 +647,8 @@ function Step3() {
                                     </div>
                                 </div>
                             </div>
-                            <button className="slds-button slds-button_brand">
-                                Brand Button
+                            <button className="slds-button slds-button_brand slds-button_stretch slds-m-top_medium">
+                                Pay
                             </button>
                         </>
                     </div>
