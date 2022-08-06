@@ -4,6 +4,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background-color: white !important;
 }
 
 a {
@@ -16,11 +17,4 @@ a {
 }
 
 
-.react-calendar__month-view__days__day--weekend {
-  color: #000000 !important;
-}
-.react-calendar__tile--active {
-  background: #98ccff !important; 
-  border-radius: 50%;
-}
 

@@ -1,4 +1,5 @@
-import CalendarSelected from '../componets/calendar/calendar.js'
+
+import Information from '../componets/information/information.js'
 import { useState } from 'react';
 export default function Home() {
   const [value, onChange] = useState(new Date());
@@ -40,7 +41,7 @@ export default function Home() {
 </div>
 </div>
       </div>
-      <CalendarSelected></CalendarSelected>
+      <Information></Information>
   </div>
   )
 

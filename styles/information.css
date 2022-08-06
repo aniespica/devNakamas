@@ -1,0 +1,18 @@
+.container{
+    width: 38%;
+    margin:2%;
+    border: 2px solid;
+    border-color: #dddddd;
+    padding: 10px;
+    border-radius: 25px;
+}
+.sentence{
+    display: flex;
+    margin: 1%;
+}
+.blondFont{
+    font-weight: bold;
+}
+.inputContainer{
+    width: 50% !important;
+}
