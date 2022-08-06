@@ -19,7 +19,7 @@ export default async function handler(req, res) {
         let sql = `SELECT * FROM salesforce.Auctifera__Rental_Event__c WHERE recordtypeid = '01217000005hGnIAAU' AND Auctifera__Event_End_Date_and_Time__c >= '${currentDateTime.toISOString()}' AND Auctifera__Event_Start_Date_and_Time__c <= '${currentDateTime.toISOString()}'`;
 
         if (category != "null") {
-            sql += ` AND Auctifera__Category__c = '${category}'`;
+            sql += ` AND Auctifera__Category__c LIKE '%${category}%'`;
         }
 
         const { rows } = await db.query(sql);

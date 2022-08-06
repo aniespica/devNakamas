@@ -25,10 +25,16 @@ function Step1({ onStepChange }) {
     const [data, setData] = useState(null);
     const [isLoading, setLoading] = useState(false);
     const [currentDate, setCurrentDate] = useState(new Date());
-    const [currentCategory, setCurrentCategory] = useState(null);
+    const [currentCategory, setCurrentCategory] = useState("");
     const [currentFrame, setCurrentFrame] = useState(["08:00:00", "10:00:00"]);
     const [currentCapacity, setCurrentCapacity] = useState(30);
-    const [value, onChange] = useState("10:00");
+
+    const categories = [
+        { id: "", name: "Select a category" },
+        { id: "Reception only", name: "Reception only" },
+        { id: "Wedding", name: "Wedding" },
+        { id: "Birthday Party", name: "Birthday Party" },
+    ];
 
     useEffect(() => {
         setLoading(true);
@@ -69,24 +75,42 @@ function Step1({ onStepChange }) {
                         <div className="container">
                             <div className="slds-m-top_medium">
                                 <p>
-                                    1. Select a category accoring to your
+                                    1. Select a category according to your
                                     activity
                                 </p>
                             </div>
                             <div>
-                                <div className="slds-form-element inputContainer">
+                                <div className="slds-form-element slds-size_2-of-3">
                                     <div className="slds-form-element__control">
                                         <div className="slds-select_container">
                                             <select
                                                 className="slds-select"
                                                 id="select-01"
+                                                value={currentCategory}
+                                                onChange={(value) => {
+                                                    console.log(
+                                                        "value :>> ",
+                                                        value.target.value
+                                                    );
+                                                    setCurrentCategory(
+                                                        value.target.value
+                                                    );
+                                                }}
                                             >
-                                                <option value="">
-                                                    Select…
-                                                </option>
-                                                <option>Option One</option>
-                                                <option>Option Two</option>
-                                                <option>Option Three</option>
+                                                {categories.map(
+                                                    (category, key) => {
+                                                        return (
+                                                            <option
+                                                                key={key}
+                                                                value={
+                                                                    category.id
+                                                                }
+                                                            >
+                                                                {category.name}
+                                                            </option>
+                                                        );
+                                                    }
+                                                )}
                                             </select>
                                         </div>
                                     </div>
@@ -105,7 +129,7 @@ function Step1({ onStepChange }) {
                         <div className="slds-m-top_medium">
                             <p>3. Select the time frame for you activity</p>
                         </div>
-                        <span>
+                        <span className="slds-size_2-of-3">
                             <TimePicker /> to <TimePicker />
                         </span>
 
@@ -113,23 +137,17 @@ function Step1({ onStepChange }) {
                             <p>4. Number of Guests</p>
                         </div>
                         <div className="slds-form-element">
-                            <label
-                                className="slds-form-element__label"
-                                for="text-input-id-92"
-                            >
-                                <abbr
-                                    className="slds-required"
-                                    title="required"
-                                >
-                                    {" "}
-                                </abbr>
-                            </label>
-                            <div className="slds-form-element__control">
+                            <div className="slds-form-element__control slds-size_2-of-3">
                                 <input
                                     type="text"
                                     id="text-input-id-92"
                                     required=""
                                     className="slds-input inputContainer"
+                                    onChange={(value) => {
+                                        setCurrentCapacity(
+                                            value.target.value
+                                        );
+                                    }}
                                 />
                             </div>
                         </div>
