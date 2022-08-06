@@ -23,8 +23,11 @@ function ProgressStep({ label, onClick, status }) {
             }
           ></use>
         </svg>
-
-        {/* <span className={style.label}>{label}</span> */}
+        <span style={{
+          "position": "absolute",
+          "padding-top": "70px",
+          "color": "black"
+        }}>{label}</span>
       </button>
     </li>
   );
