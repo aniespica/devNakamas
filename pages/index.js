@@ -1,10 +1,8 @@
 import { useState } from "react";
 import Image from "next/image.js";
 import { ProgressIndicator } from "../componets/progress.js";
-import { Header } from "../componets/header.js";
 import { Steps } from "../componets/step.js";
 import "@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.css";
-import style from "../styles/Home.module.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 export default function Home() {
