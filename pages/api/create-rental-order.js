@@ -26,5 +26,9 @@ export default async function handler(req, res) {
               VALUES ('${currentPackage.sfid}','${startDate.toISOString()}','${endDate.toISOString()}','${rows[0].sfid}');`;
 
         const result = await db.query(sql);
+
+        res.statusCode = 200;
+        res.json({});
+        return;
     }
 }
